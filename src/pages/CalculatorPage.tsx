@@ -180,15 +180,15 @@ export const CalculatorPage: React.FC = () => {
   return (
     <div className="pb-28 pt-4 px-4 max-w-2xl mx-auto space-y-4">
       {/* Header Info */}
-      <div className="flex items-center justify-between pb-1 border-b border-slate-800">
+      <div className="flex items-center justify-between pb-1 border-b border-slate-200 dark:border-slate-800">
         <div>
-          <h2 className="text-base font-semibold text-white">Batch Dosing Calculator</h2>
-          <p className="text-xs text-slate-400">Protective alkalinity &amp; cyanide requirement</p>
+          <h2 className="text-base font-semibold text-slate-900 dark:text-white">Batch Dosing Calculator</h2>
+          <p className="text-xs text-slate-500 dark:text-slate-400">Protective alkalinity &amp; cyanide requirement</p>
         </div>
         <button
           type="button"
           onClick={handleLoadDefaults}
-          className="text-xs text-slate-400 hover:text-amber-400 underline underline-offset-4 transition-colors"
+          className="text-xs text-slate-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-400 underline underline-offset-4 transition-colors"
         >
           Load sample data
         </button>
@@ -196,30 +196,30 @@ export const CalculatorPage: React.FC = () => {
 
       {/* Notifications */}
       {saveSuccessMessage && (
-        <div className="p-3 rounded-lg bg-emerald-950/60 border border-emerald-800 text-emerald-200 text-xs flex items-center space-x-2">
-          <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+        <div className="p-3 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-200 text-xs flex items-center space-x-2">
+          <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
           <span>{saveSuccessMessage}</span>
         </div>
       )}
 
       {validationError && (
-        <div className="p-3 rounded-lg bg-rose-950/60 border border-rose-800 text-rose-200 text-xs flex items-center space-x-2">
-          <AlertCircle className="w-4 h-4 text-rose-400 shrink-0" />
+        <div className="p-3 rounded-lg bg-rose-50 dark:bg-rose-950/60 border border-rose-200 dark:border-rose-800 text-rose-800 dark:text-rose-200 text-xs flex items-center space-x-2">
+          <AlertCircle className="w-4 h-4 text-rose-600 dark:text-rose-400 shrink-0" />
           <span>{validationError}</span>
         </div>
       )}
 
       {/* Main Input Form */}
-      <form onSubmit={handleCalculate} className="bg-[#121722] border border-slate-800 rounded-xl p-4 space-y-4">
+      <form onSubmit={handleCalculate} className="bg-white dark:bg-[#121722] border border-slate-200 dark:border-slate-800 rounded-xl p-4 shadow-sm space-y-4">
         {/* Vat selection */}
         <div>
-          <label className="block text-xs font-medium text-slate-300 mb-1">
+          <label className="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">
             Target Tank / Vat
           </label>
           <select
             value={selectedVatId}
             onChange={(e) => handleVatChange(e.target.value)}
-            className="w-full bg-[#0d1117] border border-slate-700 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400"
+            className="w-full bg-slate-50 dark:bg-[#0d1117] border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-amber-400"
           >
             {vats.map((vat) => (
               <option key={vat.id} value={vat.id}>
@@ -228,7 +228,7 @@ export const CalculatorPage: React.FC = () => {
             ))}
           </select>
           {selectedVat && (
-            <div className="mt-1 flex items-center justify-between text-[11px] text-slate-400">
+            <div className="mt-1 flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400">
               <span>Wall limit: {selectedVat.maxHeight} m</span>
               <span>Default cycle: {selectedVat.defaultCycleHours} hrs</span>
             </div>
@@ -238,7 +238,7 @@ export const CalculatorPage: React.FC = () => {
         {/* Slurry Depth & Weight */}
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="block text-xs font-medium text-slate-300 mb-1">
+            <label className="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">
               Slurry Fill Depth
             </label>
             <div className="relative">
@@ -249,7 +249,7 @@ export const CalculatorPage: React.FC = () => {
                 max={selectedVat?.maxHeight ?? 5.0}
                 value={slurryFillDepth}
                 onChange={(e) => setSlurryFillDepth(e.target.value)}
-                className="w-full bg-[#0d1117] border border-slate-700 rounded-lg px-3 py-2 text-sm text-white pr-8 focus:outline-none focus:border-amber-400"
+                className="w-full bg-slate-50 dark:bg-[#0d1117] border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-900 dark:text-white pr-8 focus:outline-none focus:border-amber-500 dark:focus:border-amber-400"
                 required
               />
               <span className="absolute right-3 top-2 text-xs text-slate-400 pointer-events-none">m</span>
@@ -257,7 +257,7 @@ export const CalculatorPage: React.FC = () => {
           </div>
 
           <div>
-            <label className="block text-xs font-medium text-slate-300 mb-1">
+            <label className="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">
               1-Liter Slurry Weight
             </label>
             <div className="relative">
@@ -268,7 +268,7 @@ export const CalculatorPage: React.FC = () => {
                 max="2200"
                 value={slurryWeight1L}
                 onChange={(e) => setSlurryWeight1L(e.target.value)}
-                className="w-full bg-[#0d1117] border border-slate-700 rounded-lg px-3 py-2 text-sm text-white pr-8 focus:outline-none focus:border-amber-400"
+                className="w-full bg-slate-50 dark:bg-[#0d1117] border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-900 dark:text-white pr-8 focus:outline-none focus:border-amber-500 dark:focus:border-amber-400"
                 placeholder="1380"
                 required
               />
@@ -280,7 +280,7 @@ export const CalculatorPage: React.FC = () => {
         {/* Initial pH & Leach Cycle */}
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="block text-xs font-medium text-slate-300 mb-1">
+            <label className="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">
               Starting Slurry pH
             </label>
             <div className="relative">
@@ -291,7 +291,7 @@ export const CalculatorPage: React.FC = () => {
                 max="12.0"
                 value={initialPh}
                 onChange={(e) => setInitialPh(e.target.value)}
-                className="w-full bg-[#0d1117] border border-slate-700 rounded-lg px-3 py-2 text-sm text-white pr-10 focus:outline-none focus:border-amber-400"
+                className="w-full bg-slate-50 dark:bg-[#0d1117] border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-900 dark:text-white pr-10 focus:outline-none focus:border-amber-500 dark:focus:border-amber-400"
                 placeholder="8.4"
                 required
               />
@@ -300,7 +300,7 @@ export const CalculatorPage: React.FC = () => {
           </div>
 
           <div>
-            <label className="block text-xs font-medium text-slate-300 mb-1">
+            <label className="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">
               Cycle Duration
             </label>
             <div className="relative">
@@ -311,7 +311,7 @@ export const CalculatorPage: React.FC = () => {
                 max="168"
                 value={cycleHours}
                 onChange={(e) => setCycleHours(e.target.value)}
-                className="w-full bg-[#0d1117] border border-slate-700 rounded-lg px-3 py-2 text-sm text-white pr-10 focus:outline-none focus:border-amber-400"
+                className="w-full bg-slate-50 dark:bg-[#0d1117] border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-900 dark:text-white pr-10 focus:outline-none focus:border-amber-500 dark:focus:border-amber-400"
                 required
               />
               <span className="absolute right-3 top-2 text-xs text-slate-400 pointer-events-none">hrs</span>
@@ -321,7 +321,7 @@ export const CalculatorPage: React.FC = () => {
 
         {/* Ore Chemistry Profile */}
         <div>
-          <label className="block text-xs font-medium text-slate-300 mb-1.5">
+          <label className="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1.5">
             Ore Chemistry Profile
           </label>
           <div className="space-y-1.5">
@@ -352,8 +352,8 @@ export const CalculatorPage: React.FC = () => {
                   onClick={() => setCyanicideProfile(item.id as CyanicideProfile)}
                   className={`flex items-center justify-between p-2.5 rounded-lg border cursor-pointer transition-colors ${
                     isSelected
-                      ? 'bg-slate-800/90 border-amber-500 text-white'
-                      : 'bg-[#0d1117] border-slate-800 text-slate-300 hover:border-slate-700'
+                      ? 'bg-amber-50/70 dark:bg-slate-800/90 border-amber-500 text-slate-900 dark:text-white shadow-xs'
+                      : 'bg-slate-50 dark:bg-[#0d1117] border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:border-slate-300 dark:hover:border-slate-700'
                   }`}
                 >
                   <div className="flex items-center space-x-2.5">
@@ -362,14 +362,14 @@ export const CalculatorPage: React.FC = () => {
                       name="cyanicideProfile"
                       checked={isSelected}
                       onChange={() => setCyanicideProfile(item.id as CyanicideProfile)}
-                      className="accent-amber-400"
+                      className="accent-amber-500"
                     />
                     <div>
                       <div className="text-xs font-semibold leading-tight">{item.name}</div>
-                      <div className="text-[11px] text-slate-400">{item.desc}</div>
+                      <div className="text-[11px] text-slate-500 dark:text-slate-400">{item.desc}</div>
                     </div>
                   </div>
-                  <span className="text-[11px] font-mono text-slate-400">{item.detail}</span>
+                  <span className="text-[11px] font-mono text-slate-500 dark:text-slate-400">{item.detail}</span>
                 </label>
               );
             })}
@@ -378,7 +378,7 @@ export const CalculatorPage: React.FC = () => {
 
         {/* Notes (Optional) */}
         <div>
-          <label className="block text-xs font-medium text-slate-300 mb-1">
+          <label className="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">
             Batch Notes <span className="text-slate-400 font-normal">(optional)</span>
           </label>
           <input
@@ -386,14 +386,14 @@ export const CalculatorPage: React.FC = () => {
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
             placeholder="e.g. Pit #2 oxidized ore, -80 mesh"
-            className="w-full bg-[#0d1117] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-amber-400"
+            className="w-full bg-slate-50 dark:bg-[#0d1117] border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 text-xs text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:border-amber-500 dark:focus:border-amber-400"
           />
         </div>
 
         {/* Submit */}
         <button
           type="submit"
-          className="w-full py-3 px-4 rounded-lg bg-amber-500 hover:bg-amber-400 active:bg-amber-600 text-slate-950 font-bold text-xs uppercase tracking-wider transition-colors"
+          className="w-full py-3 px-4 rounded-lg bg-amber-500 hover:bg-amber-400 active:bg-amber-600 text-slate-950 font-bold text-xs uppercase tracking-wider transition-colors shadow-xs"
         >
           Calculate Batch Dosing
         </button>
@@ -403,13 +403,13 @@ export const CalculatorPage: React.FC = () => {
       {calculationResult && (
         <div className="space-y-3 pt-1">
           <div className="flex items-center justify-between">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
               Calculation Output
             </h3>
             <button
               type="button"
               onClick={() => setCalculationResult(null)}
-              className="text-xs text-slate-400 hover:text-slate-200 flex items-center space-x-1"
+              className="text-xs text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 flex items-center space-x-1"
             >
               <RotateCcw className="w-3 h-3" />
               <span>Clear</span>
@@ -419,86 +419,86 @@ export const CalculatorPage: React.FC = () => {
           {/* Primary Action Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {/* Card A: Hydrated Lime */}
-            <div className="border border-amber-500/40 bg-[#1e1710] rounded-xl p-4">
+            <div className="border border-amber-300 dark:border-amber-500/40 bg-amber-50/70 dark:bg-[#1e1710] rounded-xl p-4 shadow-xs">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold uppercase tracking-wider text-amber-300">
+                <span className="text-xs font-bold uppercase tracking-wider text-amber-800 dark:text-amber-300">
                   Hydrated Lime Required
                 </span>
-                <span className="text-[10px] font-mono font-semibold px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-200 border border-amber-500/30">
+                <span className="text-[10px] font-mono font-semibold px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-500/20 text-amber-900 dark:text-amber-200 border border-amber-200 dark:border-amber-500/30">
                   Step 1
                 </span>
               </div>
               <div className="my-2">
-                <span className="text-3xl font-black text-amber-400 font-mono">
+                <span className="text-3xl font-black text-amber-700 dark:text-amber-400 font-mono">
                   {calculationResult.requiredLimeKg}
                 </span>
-                <span className="text-lg font-bold text-amber-300 ml-1.5">kg</span>
+                <span className="text-lg font-bold text-amber-800 dark:text-amber-300 ml-1.5">kg</span>
               </div>
-              <p className="text-xs text-amber-200/90 font-medium">
+              <p className="text-xs text-amber-900 dark:text-amber-200/90 font-medium">
                 Dose first, agitate 30 min until pH &ge; 10.5
               </p>
-              <p className="text-[11px] text-amber-400/60 mt-1">
+              <p className="text-[11px] text-amber-700/80 dark:text-amber-400/60 mt-1">
                 Target setpoint: 10.8 pH (prevents HCN gas)
               </p>
             </div>
 
             {/* Card B: Sodium Cyanide */}
-            <div className="border border-cyan-500/40 bg-[#0e1d26] rounded-xl p-4">
+            <div className="border border-cyan-300 dark:border-cyan-500/40 bg-cyan-50/70 dark:bg-[#0e1d26] rounded-xl p-4 shadow-xs">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold uppercase tracking-wider text-cyan-300">
+                <span className="text-xs font-bold uppercase tracking-wider text-cyan-800 dark:text-cyan-300">
                   Sodium Cyanide Charge
                 </span>
-                <span className="text-[10px] font-mono font-semibold px-1.5 py-0.5 rounded bg-cyan-500/20 text-cyan-200 border border-cyan-500/30">
+                <span className="text-[10px] font-mono font-semibold px-1.5 py-0.5 rounded bg-cyan-100 dark:bg-cyan-500/20 text-cyan-900 dark:text-cyan-200 border border-cyan-200 dark:border-cyan-500/30">
                   Step 2
                 </span>
               </div>
               <div className="my-2">
-                <span className="text-3xl font-black text-cyan-400 font-mono">
+                <span className="text-3xl font-black text-cyan-700 dark:text-cyan-400 font-mono">
                   {calculationResult.initialCyanideKg}
                 </span>
-                <span className="text-lg font-bold text-cyan-300 ml-1.5">kg</span>
+                <span className="text-lg font-bold text-cyan-800 dark:text-cyan-300 ml-1.5">kg</span>
               </div>
-              <p className="text-xs text-cyan-200/90 font-medium">
+              <p className="text-xs text-cyan-900 dark:text-cyan-200/90 font-medium">
                 Dose only after pH check is confirmed
               </p>
-              <p className="text-[11px] text-cyan-400/60 mt-1">
+              <p className="text-[11px] text-cyan-700/80 dark:text-cyan-400/60 mt-1">
                 250 g/m³ solution baseline · 98% purity
               </p>
             </div>
           </div>
 
           {/* Secondary Operational Metrics */}
-          <div className="bg-[#121722] border border-slate-800 rounded-xl p-3.5 space-y-2.5">
-            <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
+          <div className="bg-white dark:bg-[#121722] border border-slate-200 dark:border-slate-800 rounded-xl p-3.5 space-y-2.5 shadow-xs">
+            <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
               Operational Metrics
             </span>
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-              <div className="bg-[#0d1117] p-2.5 rounded-lg border border-slate-800/80">
-                <span className="block text-[10px] text-slate-400">Dry Ore</span>
-                <span className="text-sm font-bold text-white font-mono">
+              <div className="bg-slate-50 dark:bg-[#0d1117] p-2.5 rounded-lg border border-slate-200/80 dark:border-slate-800/80">
+                <span className="block text-[10px] text-slate-500 dark:text-slate-400">Dry Ore</span>
+                <span className="text-sm font-bold text-slate-900 dark:text-white font-mono">
                   {calculationResult.dryOreTonnageTons} <span className="text-xs text-slate-400 font-sans">t</span>
                 </span>
               </div>
 
-              <div className="bg-[#0d1117] p-2.5 rounded-lg border border-slate-800/80">
-                <span className="block text-[10px] text-slate-400">Slurry SG (% Solids)</span>
-                <span className="text-sm font-bold text-white font-mono">
+              <div className="bg-slate-50 dark:bg-[#0d1117] p-2.5 rounded-lg border border-slate-200/80 dark:border-slate-800/80">
+                <span className="block text-[10px] text-slate-500 dark:text-slate-400">Slurry SG (% Solids)</span>
+                <span className="text-sm font-bold text-slate-900 dark:text-white font-mono">
                   {calculationResult.slurrySpecificGravity}{' '}
-                  <span className="text-xs text-slate-400 font-sans">({calculationResult.percentSolidsByWeight}%)</span>
+                  <span className="text-xs text-slate-500 dark:text-slate-400 font-sans">({calculationResult.percentSolidsByWeight}%)</span>
                 </span>
               </div>
 
-              <div className="bg-[#0d1117] p-2.5 rounded-lg border border-slate-800/80">
-                <span className="block text-[10px] text-slate-400">Active Solution</span>
-                <span className="text-sm font-bold text-white font-mono">
+              <div className="bg-slate-50 dark:bg-[#0d1117] p-2.5 rounded-lg border border-slate-200/80 dark:border-slate-800/80">
+                <span className="block text-[10px] text-slate-500 dark:text-slate-400">Active Solution</span>
+                <span className="text-sm font-bold text-slate-900 dark:text-white font-mono">
                   {calculationResult.waterVolumeM3} <span className="text-xs text-slate-400 font-sans">m³</span>
                 </span>
               </div>
 
-              <div className="bg-[#0d1117] p-2.5 rounded-lg border border-slate-800/80">
-                <span className="block text-[10px] text-slate-400">Maintenance Rate</span>
-                <span className="text-sm font-bold text-white font-mono">
+              <div className="bg-slate-50 dark:bg-[#0d1117] p-2.5 rounded-lg border border-slate-200/80 dark:border-slate-800/80">
+                <span className="block text-[10px] text-slate-500 dark:text-slate-400">Maintenance Rate</span>
+                <span className="text-sm font-bold text-slate-900 dark:text-white font-mono">
                   {calculationResult.hourlyReplenishmentRateKgPerHour}{' '}
                   <span className="text-xs text-slate-400 font-sans">kg/h</span>
                 </span>
@@ -511,7 +511,7 @@ export const CalculatorPage: React.FC = () => {
             type="button"
             disabled={isSubmitting}
             onClick={handleSaveToLedger}
-            className="w-full py-3 px-4 rounded-lg bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs uppercase tracking-wider transition-colors flex items-center justify-center space-x-2 border border-slate-700 disabled:opacity-50"
+            className="w-full py-3 px-4 rounded-lg bg-slate-900 hover:bg-slate-800 dark:bg-slate-800 dark:hover:bg-slate-700 text-white font-bold text-xs uppercase tracking-wider transition-colors flex items-center justify-center space-x-2 border border-slate-800 dark:border-slate-700 disabled:opacity-50 shadow-sm"
           >
             <Save className="w-4 h-4 text-amber-400" />
             <span>{isSubmitting ? 'Saving...' : 'Log Batch to Local Ledger'}</span>
