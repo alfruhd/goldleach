@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Wifi, WifiOff, Sun, Moon } from 'lucide-react';
+import { WifiOff, Sun, Moon } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import { Logo } from './Logo';
 
@@ -33,6 +33,13 @@ export const Header: React.FC = () => {
               <span className="text-[11px] font-mono font-medium text-slate-400 dark:text-slate-500">
                 v1.0
               </span>
+              {/* Subtle professional live status dot */}
+              <span
+                className={`inline-block w-1.5 h-1.5 rounded-full ${
+                  isOnline ? 'bg-emerald-500' : 'bg-amber-500 animate-pulse'
+                }`}
+                title={isOnline ? 'System Online' : 'Operating in Offline Mode'}
+              />
             </div>
             <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 leading-none">
               Vat &amp; CIL Reagent Calculator
@@ -41,15 +48,10 @@ export const Header: React.FC = () => {
         </div>
 
         <div className="flex items-center space-x-2">
-          {/* Online/Offline status pill */}
-          {isOnline ? (
-            <div className="flex items-center space-x-1.5 px-2 py-1 rounded-md bg-emerald-50 dark:bg-slate-800/80 border border-emerald-200 dark:border-slate-700/60 text-emerald-700 dark:text-slate-300 text-xs font-medium">
-              <Wifi className="w-3 h-3 text-emerald-500 dark:text-emerald-400" />
-              <span>Online</span>
-            </div>
-          ) : (
-            <div className="flex items-center space-x-1.5 px-2 py-1 rounded-md bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 text-amber-800 dark:text-amber-300 text-xs font-medium">
-              <WifiOff className="w-3 h-3 text-amber-600 dark:text-amber-400" />
+          {/* Only show informative badge if connection is lost */}
+          {!isOnline && (
+            <div className="flex items-center space-x-1.5 px-2 py-1 rounded-md bg-amber-500/10 border border-amber-500/30 text-amber-700 dark:text-amber-300 text-xs font-medium">
+              <WifiOff className="w-3 h-3 text-amber-500" />
               <span>Offline Mode</span>
             </div>
           )}
