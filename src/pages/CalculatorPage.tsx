@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { db, seedInitialVats, generateNextBatchCode } from '../lib/db';
 import {
   calculateBatchDosing,
@@ -17,6 +17,9 @@ import {
 } from 'lucide-react';
 
 export const CalculatorPage: React.FC = () => {
+  // Output scroll ref
+  const outputRef = useRef<HTMLDivElement>(null);
+
   // Vat state
   const [vats, setVats] = useState<VatConfig[]>([]);
   const [selectedVatId, setSelectedVatId] = useState<string>('');
@@ -115,6 +118,11 @@ export const CalculatorPage: React.FC = () => {
     });
 
     setCalculationResult(result);
+
+    // Smooth scroll down to output section
+    setTimeout(() => {
+      outputRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
   };
 
   const handleSaveToLedger = async () => {
@@ -404,7 +412,7 @@ export const CalculatorPage: React.FC = () => {
 
       {/* Output Section */}
       {calculationResult && (
-        <div className="space-y-3 pt-1">
+        <div ref={outputRef} className="space-y-3 pt-1 scroll-mt-20">
           <div className="flex items-center justify-between">
             <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
               Calculation Output
