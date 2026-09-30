@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { db, seedInitialVats, generateNextBatchCode } from '../lib/db';
 import {
   calculateBatchDosing,
@@ -39,21 +39,29 @@ export const CalculatorPage: React.FC = () => {
   const [saveSuccessMessage, setSaveSuccessMessage] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
-  // Load vats on mount
-  const loadVats = useCallback(async () => {
-    await seedInitialVats();
-    const allVats = await db.vats.toArray();
-    setVats(allVats);
-    if (allVats.length > 0 && !selectedVatId) {
-      setSelectedVatId(allVats[0].id);
-      setSelectedVat(allVats[0]);
-      setCycleHours(String(allVats[0].defaultCycleHours));
-    }
-  }, [selectedVatId]);
-
   useEffect(() => {
-    loadVats();
-  }, [loadVats]);
+    let isMounted = true;
+    const initVats = async () => {
+      try {
+        await seedInitialVats();
+        const allVats = await db.vats.toArray();
+        if (isMounted) {
+          setVats(allVats);
+          if (allVats.length > 0 && !selectedVatId) {
+            setSelectedVatId(allVats[0].id);
+            setSelectedVat(allVats[0]);
+            setCycleHours(String(allVats[0].defaultCycleHours));
+          }
+        }
+      } catch (err) {
+        console.error('Failed to initialize vats in calculator:', err);
+      }
+    };
+    void initVats();
+    return () => {
+      isMounted = false;
+    };
+  }, [selectedVatId]);
 
   const handleVatChange = (vatId: string) => {
     setSelectedVatId(vatId);

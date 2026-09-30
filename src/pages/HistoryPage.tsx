@@ -13,9 +13,8 @@ export const HistoryPage: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [notification, setNotification] = useState<string | null>(null);
 
-  const loadBatches = useCallback(async () => {
+  const refreshBatches = useCallback(async () => {
     try {
-      setLoading(true);
       const allBatches = await db.batches.reverse().toArray();
       setBatches(allBatches);
     } catch (err) {
@@ -26,8 +25,26 @@ export const HistoryPage: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    loadBatches();
-  }, [loadBatches]);
+    let isMounted = true;
+    const fetchBatches = async () => {
+      try {
+        const allBatches = await db.batches.reverse().toArray();
+        if (isMounted) {
+          setBatches(allBatches);
+          setLoading(false);
+        }
+      } catch (err) {
+        if (isMounted) {
+          console.error('Failed to load batch records:', err);
+          setLoading(false);
+        }
+      }
+    };
+    void fetchBatches();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   const handleExportCsv = () => {
     if (batches.length === 0) return;
@@ -40,7 +57,7 @@ export const HistoryPage: React.FC = () => {
     if (!id) return;
     if (window.confirm('Delete this batch record from local ledger?')) {
       await db.batches.delete(id);
-      loadBatches();
+      await refreshBatches();
       setNotification('Record deleted.');
       setTimeout(() => setNotification(null), 2500);
     }

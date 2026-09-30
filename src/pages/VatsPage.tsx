@@ -28,10 +28,8 @@ export const VatsPage: React.FC = () => {
   const [defaultCycleHours, setDefaultCycleHours] = useState<string>('36');
   const [formError, setFormError] = useState<string | null>(null);
 
-  const loadVats = useCallback(async () => {
+  const refreshVats = useCallback(async () => {
     try {
-      setLoading(true);
-      await seedInitialVats();
       const allVats = await db.vats.toArray();
       setVats(allVats);
     } catch (err) {
@@ -42,8 +40,27 @@ export const VatsPage: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    loadVats();
-  }, [loadVats]);
+    let isMounted = true;
+    const initVats = async () => {
+      try {
+        await seedInitialVats();
+        const allVats = await db.vats.toArray();
+        if (isMounted) {
+          setVats(allVats);
+          setLoading(false);
+        }
+      } catch (err) {
+        if (isMounted) {
+          console.error('Failed to load vats:', err);
+          setLoading(false);
+        }
+      }
+    };
+    void initVats();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   const openAddModal = () => {
     setEditingVatId(null);
@@ -135,7 +152,7 @@ export const VatsPage: React.FC = () => {
 
     try {
       await db.vats.put(updatedVat);
-      await loadVats();
+      await refreshVats();
       closeModal();
       setNotification(`Vat "${updatedVat.name}" saved.`);
       setTimeout(() => setNotification(null), 2500);
@@ -153,7 +170,7 @@ export const VatsPage: React.FC = () => {
 
     if (window.confirm(`Delete configuration for "${vat.name}"?`)) {
       await db.vats.delete(vat.id);
-      await loadVats();
+      await refreshVats();
       setNotification(`Vat "${vat.name}" deleted.`);
       setTimeout(() => setNotification(null), 2500);
     }
@@ -163,7 +180,7 @@ export const VatsPage: React.FC = () => {
     if (window.confirm('Reset vats back to factory default configurations?')) {
       await db.vats.clear();
       await seedInitialVats();
-      await loadVats();
+      await refreshVats();
       setNotification('Restored default configurations.');
       setTimeout(() => setNotification(null), 2500);
     }
