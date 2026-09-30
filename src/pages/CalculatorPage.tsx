@@ -226,16 +226,14 @@ export const CalculatorPage: React.FC = () => {
           </div>
 
           {selectedVat && (
-            <div className="mt-2 flex flex-wrap items-center gap-1.5 text-[11px] text-slate-500 dark:text-slate-400">
-              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono text-[10px] font-semibold text-slate-700 dark:text-slate-300 uppercase">
+            <div className="mt-1.5 flex flex-wrap items-center gap-x-2 text-xs text-slate-400 dark:text-slate-500">
+              <span>
                 {selectedVat.shape} · {selectedVat.shape === 'rectangular' ? `${selectedVat.length}m × ${selectedVat.width}m` : `Ø ${selectedVat.diameter}m`}
               </span>
-              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono text-[10px] text-slate-600 dark:text-slate-400">
-                Wall Limit: <strong className="text-slate-900 dark:text-slate-200">{selectedVat.maxHeight}m</strong>
-              </span>
-              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono text-[10px] text-slate-600 dark:text-slate-400">
-                Cycle: <strong className="text-slate-900 dark:text-slate-200">{selectedVat.defaultCycleHours}h</strong>
-              </span>
+              <span>·</span>
+              <span>Wall Limit: {selectedVat.maxHeight}m</span>
+              <span>·</span>
+              <span>Cycle: {selectedVat.defaultCycleHours}h</span>
             </div>
           )}
         </div>
