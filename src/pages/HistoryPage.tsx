@@ -145,17 +145,12 @@ export const HistoryPage: React.FC = () => {
                 </div>
               </div>
 
-              {/* Status badge & parameters */}
-              <div className="flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400 pt-0.5">
-                <div className="space-x-2">
-                  <span>Depth: <strong className="text-slate-700 dark:text-slate-300 font-mono">{batch.slurryFillDepthMeters}m</strong></span>
-                  <span>SG: <strong className="text-slate-700 dark:text-slate-300 font-mono">{batch.slurrySG}</strong></span>
-                  <span>Solids: <strong className="text-slate-700 dark:text-slate-300 font-mono">{batch.percentSolids}%</strong></span>
-                  <span>Cycle: <strong className="text-slate-700 dark:text-slate-300 font-mono">{batch.cycleHours}h</strong></span>
-                </div>
-                <span className="text-[10px] px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 font-medium">
-                  Stored Locally
-                </span>
+              {/* Batch operational parameters */}
+              <div className="flex items-center text-[11px] text-slate-500 dark:text-slate-400 pt-0.5 space-x-3">
+                <span>Depth: <strong className="text-slate-700 dark:text-slate-300 font-mono">{batch.slurryFillDepthMeters}m</strong></span>
+                <span>SG: <strong className="text-slate-700 dark:text-slate-300 font-mono">{batch.slurrySG}</strong></span>
+                <span>Solids: <strong className="text-slate-700 dark:text-slate-300 font-mono">{batch.percentSolids}%</strong></span>
+                <span>Cycle: <strong className="text-slate-700 dark:text-slate-300 font-mono">{batch.cycleHours}h</strong></span>
               </div>
 
               {batch.notes && (
