@@ -136,12 +136,12 @@ export const HistoryPage: React.FC = () => {
                   <span className="font-bold text-slate-900 dark:text-white font-mono">{batch.dryTonnage} t</span>
                 </div>
                 <div>
-                  <span className="block text-[10px] text-amber-700/80 dark:text-amber-400/80">Lime Added</span>
-                  <span className="font-bold text-amber-700 dark:text-amber-400 font-mono">{batch.limeDosedKg} kg</span>
+                  <span className="block text-[10px] text-slate-500 dark:text-slate-400">Lime Dosed</span>
+                  <span className="font-bold text-slate-900 dark:text-white font-mono">{batch.limeDosedKg} kg</span>
                 </div>
                 <div>
-                  <span className="block text-[10px] text-cyan-700/80 dark:text-cyan-400/80">Cyanide (NaCN)</span>
-                  <span className="font-bold text-cyan-700 dark:text-cyan-400 font-mono">{batch.cyanideDosedKg} kg</span>
+                  <span className="block text-[10px] text-slate-500 dark:text-slate-400">NaCN Charge</span>
+                  <span className="font-bold text-slate-900 dark:text-white font-mono">{batch.cyanideDosedKg} kg</span>
                 </div>
               </div>
 

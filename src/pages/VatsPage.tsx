@@ -329,7 +329,7 @@ export const VatsPage: React.FC = () => {
                     onClick={() => setShape('rectangular')}
                     className={`py-2 px-3 rounded-lg text-xs font-medium border transition-colors ${
                       shape === 'rectangular'
-                        ? 'bg-amber-50 dark:bg-amber-500/15 border-amber-500 text-amber-800 dark:text-amber-300 font-semibold'
+                        ? 'bg-slate-100 dark:bg-slate-800 border-slate-400 dark:border-slate-600 text-slate-950 dark:text-white font-semibold shadow-xs'
                         : 'bg-slate-50 dark:bg-[#0d1117] border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300'
                     }`}
                   >
@@ -340,7 +340,7 @@ export const VatsPage: React.FC = () => {
                     onClick={() => setShape('circular')}
                     className={`py-2 px-3 rounded-lg text-xs font-medium border transition-colors ${
                       shape === 'circular'
-                        ? 'bg-cyan-50 dark:bg-cyan-500/15 border-cyan-500 text-cyan-800 dark:text-cyan-300 font-semibold'
+                        ? 'bg-slate-100 dark:bg-slate-800 border-slate-400 dark:border-slate-600 text-slate-950 dark:text-white font-semibold shadow-xs'
                         : 'bg-slate-50 dark:bg-[#0d1117] border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300'
                     }`}
                   >
