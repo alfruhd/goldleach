@@ -419,51 +419,55 @@ export const CalculatorPage: React.FC = () => {
           {/* Primary Action Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {/* Card A: Hydrated Lime */}
-            <div className="border border-amber-300 dark:border-amber-500/40 bg-amber-50/70 dark:bg-[#1e1710] rounded-xl p-4 shadow-xs">
+            <div className="bg-white dark:bg-[#121722] border border-slate-200 dark:border-slate-800 rounded-xl p-4 shadow-sm border-l-4 border-l-amber-500">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold uppercase tracking-wider text-amber-800 dark:text-amber-300">
+                <span className="text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300">
                   Hydrated Lime Required
                 </span>
-                <span className="text-[10px] font-mono font-semibold px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-500/20 text-amber-900 dark:text-amber-200 border border-amber-200 dark:border-amber-500/30">
+                <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/20">
                   Step 1
                 </span>
               </div>
-              <div className="my-2">
-                <span className="text-3xl font-black text-amber-700 dark:text-amber-400 font-mono">
+              <div className="my-2.5 flex items-baseline">
+                <span className="text-3xl sm:text-4xl font-black text-slate-950 dark:text-white font-mono tracking-tight">
                   {calculationResult.requiredLimeKg}
                 </span>
-                <span className="text-lg font-bold text-amber-800 dark:text-amber-300 ml-1.5">kg</span>
+                <span className="text-base font-bold text-slate-500 dark:text-slate-400 ml-1.5">kg</span>
               </div>
-              <p className="text-xs text-amber-900 dark:text-amber-200/90 font-medium">
-                Dose first, agitate 30 min until pH &ge; 10.5
-              </p>
-              <p className="text-[11px] text-amber-700/80 dark:text-amber-400/60 mt-1">
-                Target setpoint: 10.8 pH (prevents HCN gas)
-              </p>
+              <div className="pt-2 border-t border-slate-100 dark:border-slate-800/80 space-y-0.5">
+                <p className="text-xs text-slate-900 dark:text-slate-200 font-semibold">
+                  Dose first, agitate 30 min until pH &ge; 10.5
+                </p>
+                <p className="text-[11px] text-slate-500 dark:text-slate-400">
+                  Target setpoint: 10.8 pH (prevents HCN gas)
+                </p>
+              </div>
             </div>
 
             {/* Card B: Sodium Cyanide */}
-            <div className="border border-cyan-300 dark:border-cyan-500/40 bg-cyan-50/70 dark:bg-[#0e1d26] rounded-xl p-4 shadow-xs">
+            <div className="bg-white dark:bg-[#121722] border border-slate-200 dark:border-slate-800 rounded-xl p-4 shadow-sm border-l-4 border-l-cyan-500">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold uppercase tracking-wider text-cyan-800 dark:text-cyan-300">
+                <span className="text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300">
                   Sodium Cyanide Charge
                 </span>
-                <span className="text-[10px] font-mono font-semibold px-1.5 py-0.5 rounded bg-cyan-100 dark:bg-cyan-500/20 text-cyan-900 dark:text-cyan-200 border border-cyan-200 dark:border-cyan-500/30">
+                <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-700 dark:text-cyan-400 border border-cyan-500/20">
                   Step 2
                 </span>
               </div>
-              <div className="my-2">
-                <span className="text-3xl font-black text-cyan-700 dark:text-cyan-400 font-mono">
+              <div className="my-2.5 flex items-baseline">
+                <span className="text-3xl sm:text-4xl font-black text-slate-950 dark:text-white font-mono tracking-tight">
                   {calculationResult.initialCyanideKg}
                 </span>
-                <span className="text-lg font-bold text-cyan-800 dark:text-cyan-300 ml-1.5">kg</span>
+                <span className="text-base font-bold text-slate-500 dark:text-slate-400 ml-1.5">kg</span>
               </div>
-              <p className="text-xs text-cyan-900 dark:text-cyan-200/90 font-medium">
-                Dose only after pH check is confirmed
-              </p>
-              <p className="text-[11px] text-cyan-700/80 dark:text-cyan-400/60 mt-1">
-                250 g/m³ solution baseline · 98% purity
-              </p>
+              <div className="pt-2 border-t border-slate-100 dark:border-slate-800/80 space-y-0.5">
+                <p className="text-xs text-slate-900 dark:text-slate-200 font-semibold">
+                  Dose only after pH check is confirmed
+                </p>
+                <p className="text-[11px] text-slate-500 dark:text-slate-400">
+                  250 g/m³ solution baseline · 98% purity
+                </p>
+              </div>
             </div>
           </div>
 
